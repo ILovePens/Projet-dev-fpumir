@@ -17,7 +17,7 @@ video.play{
 #progressBar{
 	width:80%;
 	height:8px;
-	margin-left:10%;
+	position: relative;
 	margin-top:-40px;
 	margin-bottom:20px;
 	border-radius:4px;
@@ -48,8 +48,8 @@ video.play{
 
 #button{
 	position:absolute;
-	top:21%;
-	left:44%;
+	top:15%;
+	left:42%;
 	z-index:0;
 	height:200px;
 	width:200px;
