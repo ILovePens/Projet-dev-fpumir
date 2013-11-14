@@ -296,6 +296,13 @@ a:focus {
 .span12 {
   width: 940px;
 }
+
+.span12_header {
+  width: 100%;
+  height: 100px;
+  background-color: #ff473e;
+}
+
 /*modif*/
 .span12_video{
 	width: 940px;
