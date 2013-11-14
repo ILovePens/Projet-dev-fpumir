@@ -1,5 +1,5 @@
 body{
-	background:#202118;
+	background:#dbdada;
 }
 
 video{
@@ -48,7 +48,7 @@ video.play{
 
 #button{
 	position:absolute;
-	top:15%;
+	top:35%;
 	left:42%;
 	z-index:0;
 	height:200px;
