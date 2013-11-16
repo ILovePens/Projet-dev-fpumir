@@ -70,11 +70,27 @@
 	  	  str +="<b>id: </b>"+response.id+"<br>";
 	  	  str +="<b>Email:</b> "+response.email+"<br>";
 		  str +='<b>Image</b>: <img src="http://graph.facebook.com/'+response.id+'/picture"/><br>';
-	  	  str +="<input type='button' value='Logout' onclick='Logout();'/>";
+	  	  str +="<input type='button' value='Load Friends' onclick='loadFriends();'/>";
+		  str +="<input type='button' value='Logout' onclick='Logout();'/>";
 	  	  document.getElementById("status").innerHTML=str;
 	  	  	    
     });
     }
+	
+	function loadFriends(){
+    //get array of friends
+    FB.api('/me/friends', function(response) {
+        console.log(response);
+        var str="";
+        for(i=0;i<response.data.length;i++)
+            {
+				str += '<img src="http://graph.facebook.com/'+response.data[i].id+'/picture"/>';
+                str += response.data[i].name+"<br>";
+            }
+		document.getElementById("facebook-friends").innerHTML=str;
+    });
+	}
+
 	function Logout()
 	{
 		FB.logout(function(){document.location.reload();});
@@ -132,8 +148,9 @@
 			<div id="status">
 			Se connecter avec Facebook :<br/>
 			<img src="img/Button_FB_Connect.jpg" style="cursor:pointer;" onclick="Login()"/>
+			<script src="//connect.facebook.net/en_US/all.js"></script>
 			</div>
-			<br/><br/><br/><br/><br/>
+			<div id="facebook-friends">
 			<div id="message">
 			Logs:<br/>
 			</div>
@@ -155,7 +172,8 @@
 </div>
 
 <!-- Intégration de la libraire jQuery -->
-<script src="bootstrap/js/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <!-- Intégration de la libraire de composants du Bootstrap -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="video/js/video.js"></script>
