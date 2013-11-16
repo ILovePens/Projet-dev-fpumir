@@ -297,20 +297,29 @@ a:focus {
   width: 940px;
 }
 /*modif*/
-.span12_header {
+.span12_header1 {
+  width: 100%;
+  height: 100px;
+  background-color: #ff473e;
+  z-index:99;
+}
+/*modif*/
+.span12_header2{
+  margin-top:-100px;
   width: 100%;
   height: 100px;
   background-color: #ff473e;
 }
 /*modif*/
-.span12_footer{
-  width: 98%;
+footer{
+  width: 940;
   height: 100px;
   background-color: #ff473e;
 }
 
 /*modif*/
 .span12_video{
+	margin-top: 10px;
 	width: 940px;
 	text-align: left;
 }
@@ -4658,9 +4667,9 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav {
   position: relative;
-  left: 0;
+  top:25px;
   display: block;
-  float: left;
+  left : 35%;/*modif*/
   margin: 0 10px 0 0;
 }
 
