@@ -14,6 +14,7 @@ git status -> afficher état des fichiers
 git push -> pousser son travail sur un dépôt distant
 git push origin master -> pousser dans origin master
 git rm -> supprimer fichier
+git clone [url] -> cloner un repo
 
 étapes à suivre :
 git status -> afficher état des fichiers
