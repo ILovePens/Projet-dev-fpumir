@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'TabithaRegular';
+    src: url('tabitha.eot');
+    src: url('tabitha.eot') format('embedded-opentype'),
+         url('tabitha.woff') format('woff'),
+         url('tabitha.ttf') format('truetype'),
+         url('tabitha.svg#TabithaRegular') format('svg');
+}

@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'TrebuchetMSBold';
+    src: url('10157.eot');
+    src: url('10157.eot') format('embedded-opentype'),
+         url('10157.woff') format('woff'),
+         url('10157.ttf') format('truetype'),
+         url('10157.svg#TrebuchetMSBold') format('svg');
+}

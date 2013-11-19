@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'AmplifyPersonalUseOnlyRegular';
+    src: url('amplify_personaluseonly.eot');
+    src: url('amplify_personaluseonly.eot') format('embedded-opentype'),
+         url('amplify_personaluseonly.woff') format('woff'),
+         url('amplify_personaluseonly.ttf') format('truetype'),
+         url('amplify_personaluseonly.svg#AmplifyPersonalUseOnlyRegular') format('svg');
+}
