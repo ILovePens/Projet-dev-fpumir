@@ -13,6 +13,9 @@
 	</head>
 
 	<body>
+
+		<div id="background"></div>
+		
 		<header>
 		
 			<div class="content">
@@ -32,49 +35,49 @@
 		</header>
 
 		<div class="content">
-			<p class="column">
-				<nav>
-					<ul>
-						<li id="home">
+			
+			<nav>
+				<ul>
+					<li id="home">
+						<figure>
+							<img src="profilPic.jpg" alt=""/>
+							<figcaption>Prenom Nom</figcaption>
+						</figure>
+					</li>
+
+					<li id="notifications">
+						<a href="">
 							<figure>
 								<img src="profilPic.jpg" alt=""/>
-								<figcaption>Prenom Nom</figcaption>
+								<figcaption>Prenom Nom est allé au Lieu</figcaption>
 							</figure>
-						</li>
+						</a>
+					</li>
 
-						<li id="notifications">
-							<a href="">
-								<figure>
-									<img src="profilPic.jpg" alt=""/>
-									<figcaption>Prenom Nom est allé au Lieu</figcaption>
-								</figure>
-							</a>
-						</li>
+					<li id="friendList">
+						<p>friend</p>
+					</li>
 
-						<li id="friendList">
-							<p>friend</p>
-						</li>
+					<li id="random">
+						<button>
+							<p>Random</p>
+						</button>
+					</li>
+				</ul>
+			</nav>
 
-						<li id="random">
-							<button>
-								<p>Random</p>
-							</button>
-						</li>
-					</ul>
-				</nav>
+			<section id="blockMap">
 
-				<section id="content">
+				<h2>La carte de Nom Prenom</h2>
 
-					<h2>La carte de Nom Prenom</h2>
+				<div id="map">
+			      <form id="geocoder">
+			        <input type="text" name="address" placeholder="Rechercher une adresse" />
+			      </form>
+			    </div>
 
-					<div id="map">
-				      <form id="geocoder">
-				        <input type="text" name="address" placeholder="Rechercher une adresse" />
-				      </form>
-				    </div>
-				    
-				</section>
-			</p>
+			</section>
+
 		</div>	
 
 		<section id="mostVisited" class="content">

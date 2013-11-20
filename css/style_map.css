@@ -42,6 +42,18 @@ body
 	margin: 0 auto;
 }
 
+#background
+{
+	position: absolute;
+	top:0px;
+	width: 75%;
+	height:899px;
+	max-width: 1000px;
+	margin-left: 13%;
+	background-color: #fff;
+	z-index: -1;
+}
+
 
 .content
 {
@@ -110,16 +122,6 @@ header
 			
 		}
 
-.column
-{
-	position: absolute;
-	top:0px;
-	width: 75%;
-	height:884px;
-	max-width: 1000px;
-	background-color: #fff;
-	z-index: -1;
-}
 
 nav
 {
@@ -132,7 +134,7 @@ nav
 	z-index: 100;
 }
 
-#content
+#blockMap
 {
 	margin-top: -539px;
 	margin-left: 19.6%;
@@ -209,7 +211,7 @@ nav
 	{
 		background-color: transparent;
 		color:#303030;
-		margin-top: -15px;
+		margin-top: 3px;
 		margin-bottom: -16px;
 		padding-left: 0;
 	}
@@ -246,9 +248,9 @@ footer
 }
 	footer ul
 	{
-		padding: 0;
 		float: left;
-		margin-left: 33%;
+		margin-left: 13%;
+		padding-left: 16.5%;
 	}		
 
 	footer li 
@@ -259,6 +261,8 @@ footer
 
 	footer li a
 	{
+		position: relative;
+		margin-top: -23px;
 		display: block;
 		float: left;
 		text-decoration: none;
