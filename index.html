@@ -1,186 +1,95 @@
-<!DOCTYPE html>
 <html lang="fr">
-	<!--test-->
-<head>
-	<title>FriendSheep</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<!-- On ouvre la fenêtre à la largeur de l'écran -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Intégration du CSS Bootstrap -->
-	<link href="bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
-	<link rel="stylesheet" href="video/css/video.css">
-<script>
-  window.fbAsyncInit = function() {
-	// on initialise le FB JS SDK / init the FB JS SDK
-    FB.init({
-      appId      : '255821301231746', // ID de l'application / Application's ID
-      channelUrl : 'http://localhost/Projet-dev-fpumir/', // URL du fichier / Channel File
-      status     : true, // vérifie si connecté / check login status
-      cookie     : true, // autorisation de l'utilisation des cookie / enable cookies to allow the server to access the session
-      xfbml      : true  //  utilisé pour intégrer des modules sociaux / look for social plugins on the page
-    });
-    
-    
-	FB.Event.subscribe('auth.authResponseChange', function(response) 
-	{
- 	 if (response.status === 'connected') 
-  	{
-  		document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
-  		// SUCCES / SUCCESS
-  		
-  	}	 
-	else if (response.status === 'not_authorized') 
-    {
-    	document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		// ECHEC / FAILED
-    } else 
-    {
-    	document.getElementById("message").innerHTML +=  "<br>Logged Out";
+		<title>FriendSheep</title>
+		<meta name="description" content="">
 
-    	// ERREUR INCONNUE / UNKNOWN ERROR
-    }
-	});	
-	
-    };
-    // fonction qui permet de récupérer les données utilisateurs si autorisé
-   	function Login()
-	{
-	
-		FB.login(function(response) {
-		   if (response.authResponse) 
-		   {
-		    	getUserInfo();
-  			} else 
-  			{
-  	    	 console.log('User cancelled login or did not fully authorize.');
-   			}
-		 },{scope: 'email,user_photos,user_videos'});
-	
-	
-	}
-  // fonction appelée si on peut récupérer les données
-  function getUserInfo() {
-	    FB.api('/me', function(response) {
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+	 	
+		<link rel="stylesheet" href="css/style_map.css">
+		<link rel="stylesheet" href="video/css/video.css">
+	</head>
 
-	  var str="<b>Name</b> : "+response.name+"<br>";
-	  	  str +="<b>Link: </b>"+response.link+"<br>";
-	  	  str +="<b>Username:</b> "+response.username+"<br>";
-	  	  str +="<b>id: </b>"+response.id+"<br>";
-	  	  str +="<b>Email:</b> "+response.email+"<br>";
-		  str +='<b>Image</b>: <img src="http://graph.facebook.com/'+response.id+'/picture"/><br>';
-	  	  str +="<input type='button' value='Load Friends' onclick='loadFriends();'/>";
-		  str +="<input type='button' value='Logout' onclick='Logout();'/>";
-	  	  document.getElementById("status").innerHTML=str;
-	  	  	    
-    });
-    }
-	
-	function loadFriends(){
-    //get array of friends
-    FB.api('/me/friends', function(response) {
-        console.log(response);
-        var str="";
-        for(i=0;i<response.data.length;i++)
-            {
-				str += '<img src="http://graph.facebook.com/'+response.data[i].id+'/picture"/>';
-                str += response.data[i].name+"<br>";
-            }
-		document.getElementById("facebook-friends").innerHTML=str;
-    });
-	}
+	<body>
+		<header>
+		
+			<div class="content">
+				<h1>
+					<img src="img/logo.png" alt="logo_friendsheep" />
+				</h1>
+				<h2 id="baseline">Laissez-vous guider par vos amis</h2>
+			</div>
 
-	function Logout()
-	{
-		FB.logout(function(){document.location.reload();});
-	}
+		</header>
 
-  // Load the SDK asynchronously
-  (function(d){
-     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/en_US/all.js";
-     ref.parentNode.insertBefore(js, ref);
-   }(document));
-
-</script>
-</head>
-
-<body>
-<!-- Conteneur principal -->
-<div class="row">
-	<div class="span12_header1">
-	</div>
-</div>
-<div class="container">
-<div class="row">
-	<div class="span12_header2">
-	<h1>FriendSheep</h1>
-	<h3>Laissez vous guider par vos amis</h3>
-	</div>
-</div>
-	<div class="row">
-		<div class="span12_video">
-			  <div id="button" class="loading">
+		<div class="content">
+			<div id="button" class="loading">
 			    <span></span>
 			    <span></span>
-			  </div>
+			</div>
 			  
-			  <!-- <a href="" id="controls"></a> -->
 				<video id="video">
 			    <source src="video/assets/v06-07_ld.mp4" type='video/mp4' >
 			    <p>Your user agent does not support the HTML5 Video element.</p>
-			  </video>
+				</video>
 			  
 			  <div id="progressBar">
 			    <span class="progress"></span>
 			    <span class="buffer"></span>
 			  </div>
 
-		</div>
-	</div>
-	<div class="row">
-		<div class="span6_logo"><img src="img/logo2.jpg" style="margin-right:100px"/></div>
-		<div class="span6_form">
-			<input type="text" name="login" value="login"/>
-			<input type="password" name="password" value="password"/>
-			<input class="btn-small" type="submit" value="V" />
-			<input class="forgotPassword" type="button" name="forgotPassword" value="Mot de passe oublié ?" />
+			<form method="post" id="connexion" name="connexion" action="" style="margin-top:150px">
+				<input class="input_index" type="text" name="login" value="login"/>
+				<input class="input_index" type="password" name="password" value="password"/>
+				<input class="input_index" type="submit" value="V" />
+			</form>
+			
+			<input type="button" name="forgotPassword" value="Mot de passe oublié ?" />
 			<br /><br />
 			<div id="status">
-			Se connecter avec Facebook :<br/>
-			<img src="img/Button_FB_Connect.jpg" style="cursor:pointer;" onclick="Login()"/>
-			<script src="//connect.facebook.net/en_US/all.js"></script>
+				Se connecter avec Facebook :<br/>
+				<img src="img/Button_FB_Connect.jpg" style="cursor:pointer;" onclick="Login()"/>
+				<script src="//connect.facebook.net/en_US/all.js"></script>
 			</div>
 			<div id="facebook-friends">
-			<div id="message">
-			Logs:<br/>
+				<div id="message">
+				Logs:<br/>
+				</div>
 			</div>
-		</div>
-	</div>
-	</div>
-	<footer>
-	<div class="row">
-		<div class="navbar navbar-inverse">
-		<div class="nav-collapse collapse">
-		<ul class="nav">
-			<li><a href="mentions_legales.html">Mentions légales</a></li>
-			<li><a href="contact.html">Contacter nous</a></li>
-			<li><a href="faq.html">FAQ</a></li>
-		</ul>
-		</div>
-		</div>
-	</div>
-	</footer>
-</div>
 
+		</div>	
+
+		<footer>
+			<ul>
+				<li>
+					<a href="mentions_legales.html" id="tiret1">
+						<h3>Mentions légales</h3>
+					</a>
+				</li>
+
+				<li>
+					<a href="contact.html" id="tiret2">
+						<h3>Contactez-nous</h3>
+					</a>
+				</li>
+
+				<li>
+					<a href="faq.html">
+						<h3>F.A.Q.</h3>
+					</a>
+				</li>
+			</ul>
+		
+		</footer>	
+
+		
 <!-- Intégration de la libraire jQuery -->
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<!-- Intégration de la libraire de composants du Bootstrap -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="video/js/video.js"></script>
-</body>
+		
+	</body>
+
 </html>
