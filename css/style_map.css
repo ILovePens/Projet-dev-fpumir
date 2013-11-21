@@ -185,7 +185,7 @@ nav
 		margin-top: -37px;
 	}
 
-		.input_search
+		input
 		{
 			box-sizing: border-box;
 			font-family: 'TrebuchetMSBold';
