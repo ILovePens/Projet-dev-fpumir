@@ -348,10 +348,12 @@ footer
 .fbConnect{
 position:relative;
 top:-20px;
-left:40%;
 margin: 100px auto;
 }
 
+.fbConnect img{
+margin-left:390px;
+}
 .content_video{
 width:100%;
 background-color:grey;
