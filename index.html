@@ -10,12 +10,111 @@
 	 	
 		<link rel="stylesheet" href="css/style_map.css">
 		<link rel="stylesheet" href="video/css/video.css">
+		
+<script>
+  window.fbAsyncInit = function() {
+	// on initialise le FB JS SDK / init the FB JS SDK
+    FB.init({
+      appId      : '255821301231746', // ID de l'application / Application's ID
+      channelUrl : 'http://localhost/Projet-dev-fpumir/', // URL du fichier / Channel File
+      status     : true, // vérifie si connecté / check login status
+      cookie     : true, // autorisation de l'utilisation des cookie / enable cookies to allow the server to access the session
+      xfbml      : true  //  utilisé pour intégrer des modules sociaux / look for social plugins on the page
+    });
+    
+    
+	FB.Event.subscribe('auth.authResponseChange', function(response) 
+	{
+ 	 if (response.status === 'connected') 
+  	{
+  		document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
+  		// SUCCES / SUCCESS
+  		
+  	}	 
+	else if (response.status === 'not_authorized') 
+    {
+    	document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
+
+		// ECHEC / FAILED
+    } else 
+    {
+    	document.getElementById("message").innerHTML +=  "<br>Logged Out";
+
+    	// ERREUR INCONNUE / UNKNOWN ERROR
+    }
+	});	
+	
+    };
+    // fonction qui permet de récupérer les données utilisateurs si autorisé
+   	function Login()
+	{
+	
+		FB.login(function(response) {
+		   if (response.authResponse) 
+		   {
+		    	getUserInfo();
+  			} else 
+  			{
+  	    	 console.log('User cancelled login or did not fully authorize.');
+   			}
+		 },{scope: 'email,user_photos,user_videos'});
+	
+	
+	}
+  // fonction appelée si on peut récupérer les données
+  function getUserInfo() {
+	    FB.api('/me', function(response) {
+
+	  var str="<b>Name</b> : "+response.name+"<br>";
+	  	  str +="<b>Link: </b>"+response.link+"<br>";
+	  	  str +="<b>Username:</b> "+response.username+"<br>";
+	  	  str +="<b>id: </b>"+response.id+"<br>";
+	  	  str +="<b>Email:</b> "+response.email+"<br>";
+		  str +='<b>Image</b>: <img src="http://graph.facebook.com/'+response.id+'/picture"/><br>';
+	  	  str +="<input type='button' value='Load Friends' onclick='loadFriends();'/>";
+		  str +="<input type='button' value='Logout' onclick='Logout();'/>";
+	  	  document.getElementById("status").innerHTML=str;
+	  	  	    
+    });
+    }
+	
+	function loadFriends(){
+    //get array of friends
+    FB.api('/me/friends', function(response) {
+        console.log(response);
+        var str="";
+        for(i=0;i<response.data.length;i++)
+            {
+				str += '<img src="http://graph.facebook.com/'+response.data[i].id+'/picture"/>';
+                str += response.data[i].name+"<br>";
+            }
+		document.getElementById("facebook-friends").innerHTML=str;
+    });
+	}
+
+	function Logout()
+	{
+		FB.logout(function(){document.location.reload();});
+	}
+
+  // Load the SDK asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+
+</script>
+		
 	</head>
 
-	<body>
+	<body style="background-color:#e54141;">
+	
 		<header>
 		
-			<div class="content">
+			<div class="content_index">
 				<h1>
 					<img src="img/logo.png" alt="logo_friendsheep" />
 				</h1>
@@ -23,13 +122,12 @@
 			</div>
 
 		</header>
-
-		<div class="content">
+	<div class="content_video">
+			<div class="content">
 			<div id="button" class="loading">
 			    <span></span>
 			    <span></span>
 			</div>
-			  
 				<video id="video">
 			    <source src="video/assets/v06-07_ld.mp4" type='video/mp4' >
 			    <p>Your user agent does not support the HTML5 Video element.</p>
@@ -39,51 +137,19 @@
 			    <span class="progress"></span>
 			    <span class="buffer"></span>
 			  </div>
-
-			<form method="post" id="connexion" name="connexion" action="" style="margin-top:40px">
-				<input class="input_index" type="text" name="login" value="login"/>
-				<input class="input_index" type="password" name="password" value="password"/>
-				<input class="inputSubmit_index" type="submit" value="V" />
-			</form>
 			
-			<input class="inputButton_index" type="button" name="forgotPassword" value="Mot de passe oublié ?" />
-			<br /><br />
 			<div class="fbConnect" id="status">
-				Se connecter avec Facebook :<br/>
 				<img src="img/Button_FB_Connect.jpg" style="cursor:pointer;" onclick="Login()"/>
 				<script src="//connect.facebook.net/en_US/all.js"></script>
 			</div>
-			<div id="facebook-friends">
+			<!--<div id="facebook-friends">
 				<div id="message">
 				Logs:<br/>
 				</div>
-			</div>
+			</div>-->
 
 		</div>	
-
-		<footer>
-			<ul>
-				<li>
-					<a href="mentions_legales.html" id="tiret1">
-						<h3>Mentions légales</h3>
-					</a>
-				</li>
-
-				<li>
-					<a href="contact.html" id="tiret2">
-						<h3>Contactez-nous</h3>
-					</a>
-				</li>
-
-				<li>
-					<a href="faq.html">
-						<h3>F.A.Q.</h3>
-					</a>
-				</li>
-			</ul>
-		
-		</footer>	
-
+		</div>	
 		
 <!-- Intégration de la libraire jQuery -->
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>

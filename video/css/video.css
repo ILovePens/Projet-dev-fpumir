@@ -2,7 +2,7 @@ video{
 	opacity:0;
 	display:block;margin:0 auto;
 	width:767px;
-	height: 431px;
+	height: 433px;
 	cursor:pointer;
 }
 
@@ -44,7 +44,7 @@ video.play{
 
 #button{
 	position:absolute;
-	top:35%;
+	top:45%;
 	left:42%;
 	z-index:0;
 	height:200px;

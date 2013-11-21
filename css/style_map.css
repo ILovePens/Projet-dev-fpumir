@@ -61,6 +61,16 @@ body
 	max-width: 1000px;
 	margin: 0 auto;
 }
+
+.content_index
+{
+position: relative;
+width: 75%;
+left: 116px;
+max-width: 1000px;
+margin: 100px auto;
+}
+
 header
 {
 	width: 100%;
@@ -327,22 +337,15 @@ footer
 		margin-top: -46px;
 	}
 
+.fbConnect{
+position:relative;
+top:-20px;
+left:40%;
+margin: 100px auto;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.content_video{
+width:100%;
+background-color:grey;
+height:433px;
+}
