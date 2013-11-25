@@ -49,7 +49,6 @@ body
 	width: 75%;
 	height:899px;
 	max-width: 1000px;
-	margin-left: 13%;
 	background-color: #fff;
 	z-index: -1;
 }
@@ -119,15 +118,14 @@ header
 	}
 	#profil
 	{
-		max-width: 200px;
-		width: 14.15%;
 		height: 48px;
-		margin-left: 95.25%;
-		margin-top: -76px;
 		color: #fff;
+		float: right;
+		margin-top: -93px;
 	}
-	
-	.profil_contact{
+
+	.profil_contact
+	{
 		max-width: 200px;
 		width: 14.15%;
 		height: 48px;
@@ -135,35 +133,38 @@ header
 		margin-top: -92px;
 		color: #fff;
 	}
-
 		header div #nomProfil
 		{
 			width: 200px;
-			margin-left: -99%;
-			margin-top: -63px;
+			float: right;
+			margin-top: -1px;
+			margin-right: -20%;
 		}
 		header div a
 		{
 			text-decoration: none;
 			color: #fff;
 			font-size: 12px;
+			float: right;
+			margin-top: -31px;
+			margin-right: 25%;
 		}
 		header div a p
 		{
 			font-family: 'TrebuchetMSBold';
-			margin-left: -64%;
-			margin-top: -21px;
+			
 		}
 		header div p img
 		{
 			width: 47px;
 			height: 47px;
-			
+			float: right;
 		}
 
-#navMap
+#main
 {
 	margin-top: 16px;
+	clear: right;
 }
 
 	nav
@@ -171,7 +172,8 @@ header
 		max-width: 188px;
 		width: 18.8%;
 		height: 520px;
-		background-color: #4b4b4b;
+		background-image: url(../img/bgNav.png);
+		background-repeat: repeat-x;
 		margin-left:0;
 		margin-top: -11px;
 		z-index: 100;
@@ -182,33 +184,140 @@ header
 		list-style: none;
 		float: left;
 		height: 100%;
-		margin-left: -40px;
+		margin-left: -5px;
 		margin-top: 0px;
 	}
 
 	nav ul li
 	{
 		position: relative;
+		width: 123%;
+		margin-left: -35px;
+	}
+
+	nav ul li div
+	{
+		border: 1px solid #777573;
+		width: 97%;
+		margin-left: 1.2%;
+	}
+
+	nav ul li figure
+	{
+		margin-left: 7px;
+		width: 96%;
+	}
+		nav ul li a:after
+		{
+			content: url(../img/sepBar.png);
+			margin-left: 1.5%;
+		}
+
+	nav ul li figure img
+	{
+		width:30px;
+		height: 30px;
 	}
 	#home
 	{
-		height:37px;
+		height: 35px;
+		margin-top: -14px;
 	}
+
+		#home figcaption
+		{
+			font-family: 'AmplifyPersonalUseOnlyRegular';
+			font-size: 29px;
+			color:#fff;
+			margin-left: 35px;
+			margin-top: -31px;
+		}
 
 	#notifications
 	{
-		height: 174px;
+		height: 207px;
 	}
+
+		#notifications a
+		{
+			text-decoration: none;
+		}
+
+		#notifications figure
+		{
+			margin-left: 2.5%;
+			margin-top: 4px;
+			margin-bottom: 8px;
+		}
+
+		#notifications figcaption
+		{
+			margin-left: 20%;
+			margin-top: -29px;
+			font-family: 'TrebuchetMSBold';
+			font-size: 13px;
+			color: #fff;
+		}
+
+		#notifications figcaption span
+		{
+			font-size: 10px;
+		}
 
 	#friendList
 	{
-		height: 205px;
+		height: 193px;
+		
 	}
+		#friendList div
+		{
+			height:178px;
+		}
 
-	#random
+		#friendList p
+		{
+			margin-left: 2.5%;
+			font-family: 'TrebuchetMSBold';
+			font-size: 13px;
+			line-height: 6px;
+			color: #fff;
+		}
+
+
+	#random button
 	{
+		margin-left: 5.2%;
+		height: 65px;
+		width: 90.5%;
+		border-radius: 12px;
+		border:2px solid #383838;
+		background-color: #e54141;
 
+		-webkit-box-shadow: 
+		1px 1px 1px rgba(56, 56, 56, .25),
+		1px -1px 1px rgba(56, 56, 56, .25),
+		-1px -1px 1px rgba(56, 56, 56, .25),
+		-1px 1px 1px rgba(56, 56, 56, .25),
+		
+		inset 1px -1px 1px rgba(56, 56, 56, .25),
+		inset 1px -1px 1px rgba(56, 56, 56, .25),
+		inset 1px -1px 1px rgba(56, 56, 56, .25),
+		inset -1px 1px 1px rgba(56, 56, 56, .25);
+
+
+		/*-webkit-box-shadow:
+		inset -1px -1px 1px 1px rgba(25, 25, 25, 1);
+		box-shadow: inset -1px -1px 1px 1px rgba(25, 25, 25, 1);*/
 	}
+
+		#random button p
+		{
+			font-family: 'AmplifyPersonalUseOnlyRegular';
+			font-size: 32px;
+			color:#fff;
+			margin-top: 11px;
+
+		}
 
 	#blockMap
 	{
@@ -261,7 +370,7 @@ header
 			margin-top: -37px;
 		}
 
-			#geocoder input
+			input
 			{
 				box-sizing: border-box;
 				font-family: 'TrebuchetMSBold';
@@ -280,59 +389,93 @@ header
 
 #mostVisited
 {
-	width: 75%;
 	height: 144px;
+	width: 100%;
+	clear:left;
+	float: left;
+	margin-top: -17px;
+	margin-bottom: 65px;
 }
 
 	#mostVisited h2
 	{
 		background-color: transparent;
 		color:#303030;
-		margin-top: 3px;
-		margin-bottom: -14px;
+		margin-top: 16px;
+		margin-bottom: -11px;
 		padding-left: 0;
 	}
 
 	.mostVisited
 	{
-		display: inline-block;
-		position: relative;
+		float: left;
+		display: block;
 		width: 18.6%;
 		height: 112px;
 		margin-left: 0%;
-		margin-right: 1.09%;
-		border: 1px solid black;
+		margin-right: 1.75%;
+		margin-top: 12px;
+		background-color: #e54141;
 	}
 
-	.last
+	#last
 	{
-		
-		display: inline-block;
-		position: relative;
-		width: 18.6%;
-		height: 112px;
-		margin:0;
-		border: 1px solid black;
+		margin-right: 0%;
 	}
 
+		#mostVisited .mostVisited img
+		{
+			height: 66px;
+			width: 100%;
+		}
+
+		#mostVisited .mostVisited figcaption
+		{
+			text-decoration: none;
+			font-family: 'TrebuchetMSBold';
+			color: #fff;
+			font-size: 11px;
+			height: 46px;
+			width: 100%;
+			margin-left: 8px;
+			margin-top: 3px;
+		}
+
+		#mostVisited .mostVisited figcaption span
+		{
+			font-style: italic;
+		}
 footer
 {
 	width:100%;
 	height:100px;
 	background-color: #e54141;
 	margin-top:50px;
+	clear: left;
 
 }
+	
+	footer .content
+	{
+		height: 100px;
+	}
+
+	footer #center
+	{
+		height: 82px;
+		width: 544px;
+		margin: 0 auto;
+		padding-right: 70px;
+	}
+	
 	footer ul
 	{
 		float: left;
-		margin-left: 13%;
-		padding-left: 16.5%;
 	}		
 
 	footer li 
 	{
-		display: inline;
+		float: left;
 		list-style: none;
 	}
 
@@ -340,7 +483,6 @@ footer
 	{
 		position: relative;
 		margin-top: -23px;
-		display: block;
 		float: left;
 		text-decoration: none;
 		margin-left: 20px;
@@ -366,6 +508,7 @@ footer
 		margin-top: -46px;
 	}
 
+
 .fbConnect{
 position:relative;
 top:-20px;
@@ -390,3 +533,17 @@ color:#fff;
 .questions_reponses{
 text-align:center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -13,14 +13,12 @@
 	</head>
 
 	<body>
-
-		<div id="background"></div>
 		
 		<header>
 		
 			<div class="content">
 				<h1>
-					<a href="index.html"><img src="img/logo.png" alt="logo_friendsheep" /></a>
+					<img src="img/logo.png" alt="logo_friendsheep" />
 				</h1>
 				<h2 id="baseline">Laissez-vous guider par vos amis</h2>
 				<div id="profil">
@@ -34,28 +32,74 @@
 
 		</header>
 
-		<div class="content" id="navMap">
+		<div class="content" id="main">
 			
+			<div id="background"></div>
+
 			<nav>
 				<ul>
 					<li id="home">
 						<figure>
 							<img src="profilPic.jpg" alt=""/>
-							<figcaption>Prenom Nom</figcaption>
+							<figcaption>Ma carte</figcaption>
 						</figure>
 					</li>
 
 					<li id="notifications">
-						<a href="">
-							<figure>
-								<img src="profilPic.jpg" alt=""/>
-								<figcaption>Prenom Nom est allé au Lieu</figcaption>
-							</figure>
-						</a>
+						<div class="cadre">
+							<a href="">
+								<figure>
+									<img src="profilPic.jpg" alt=""/>
+									<figcaption>Prenom Nom <span>est allé au Lieu</span>
+									</figcaption>
+								</figure>
+							</a>
+
+							<a href="">
+								<figure>
+									<img src="profilPic.jpg" alt=""/>
+									<figcaption>Prenom Nom <span>est allé au Lieu</span>
+									</figcaption>
+								</figure>
+							</a>
+
+							<a href="">
+								<figure>
+									<img src="profilPic.jpg" alt=""/>
+									<figcaption>Prenom Nom <span>est allé au Lieu</span>
+									</figcaption>
+								</figure>
+							</a>
+
+							<a href="">
+								<figure>
+									<img src="profilPic.jpg" alt=""/>
+									<figcaption>Prenom Nom <span>est allé au Lieu</span>
+									</figcaption>
+								</figure>
+							</a>
+
+							<a href="">
+								<figure>
+									<img src="profilPic.jpg" alt=""/>
+									<figcaption>Prenom Nom <span>est allé au Lieu</span>
+									</figcaption>
+								</figure>
+							</a>
+						</div>
 					</li>
 
 					<li id="friendList">
-						<p>friend</p>
+						<div>
+							<p>Michel Mabdoul</p>
+							<p>Joseph Lurrivent</p>
+							<p>friend</p>
+							<p>friend</p>
+							<p>friend</p>
+							<p>friend</p>
+							<p>friend</p>
+							<p>friend</p>
+						</div>
 					</li>
 
 					<li id="random">
@@ -77,59 +121,78 @@
 			    </div>
 
 			</section>
+	
+			<section id="mostVisited">
 
-		</div>	
+				<h2 id="titleMostVisited">Les lieux les plus fréquentés</h2>
 
-		<section id="mostVisited" class="content">
-			<h2 id="titleMostVisited">Les lieux les plus fréquentés</h2>
+				<a href="">
+					<figure class="mostVisited">
+						<img src="venue1.jpg" alt="venue1"/>
+						<figcaption>Lieu - <span>Type de lieu</br>Nombre amis y sont déjà allés</span>
+						</figcaption>
+					</figure>
+				</a>
 
-			<figure class="mostVisited">
-				<img src="venue1.jpg" alt="venue1"/>
-				<figcaption>Lieu - Type de lieu</br>Nombre amis y sont déjà allés</figcaption>
-			</figure>
+				<a href="">
+					<figure class="mostVisited">
+						<img src="venue1.jpg" alt="venue1"/>
+						<figcaption>Lieu - <span>Type de lieu</br>Nombre amis y sont déjà allés</span>
+						</figcaption>
+					</figure>
+				</a>
 
-			<figure class="mostVisited">
-				<img src="venue1.jpg" alt="venue1"/>
-				<figcaption>Lieu - Type de lieu</br>Nombre amis y sont déjà allés</figcaption>
-			</figure>
+				<a href="">
+					<figure class="mostVisited">
+						<img src="venue1.jpg" alt="venue1"/>
+						<figcaption>Lieu - <span>Type de lieu</br>Nombre amis y sont déjà allés</span>
+						</figcaption>
+					</figure>
+				</a>
 
-			<figure class="mostVisited">
-				<img src="venue1.jpg" alt="venue1"/>
-				<figcaption>Lieu - Type de lieu</br>Nombre amis y sont déjà allés</figcaption>
-			</figure>
+				<a href="">
+					<figure class="mostVisited">
+						<img src="venue1.jpg" alt="venue1"/>
+						<figcaption>Lieu - <span>Type de lieu</br>Nombre amis y sont déjà allés</span>
+						</figcaption>
+					</figure>
+				</a>
 
-			<figure class="mostVisited">
-				<img src="venue1.jpg" alt="venue1"/>
-				<figcaption>Lieu - Type de lieu</br>Nombre amis y sont déjà allés</figcaption>
-			</figure>
-
-			<figure class="last">
-				<img src="venue1.jpg" alt="venue1"/>
-				<figcaption>Lieu - Type de lieu</br>Nombre amis y sont déjà allés</figcaption>
-			</figure>
-		</section>
+				<a href="">
+					<figure class="mostVisited" id="last">
+						<img src="venue1.jpg" alt="venue1"/>
+						<figcaption>Lieu - <span>Type de lieu</br>Nombre amis y sont déjà allés</span>
+						</figcaption>
+					</figure>
+				</a>
+			</section>
+		</div>
+		
 		
 		<footer>
-			<ul>
-				<li>
-					<a href="mentions_legales.html" id="tiret1">
-						<h3>Mentions légales</h3>
-					</a>
-				</li>
+			<div class="content">
+				<div id="center">
+					<ul>
+						<li>
+							<a href="" id="tiret1">
+								<h3>Mentions légales</h3>
+							</a>
+						</li>
 
-				<li>
-					<a href="contact.html" id="tiret2">
-						<h3>Contactez-nous</h3>
-					</a>
-				</li>
+						<li>
+							<a href="" id="tiret2">
+								<h3>Contactez-nous</h3>
+							</a>
+						</li>
 
-				<li>
-					<a href="faq.html">
-						<h3>F.A.Q.</h3>
-					</a>
-				</li>
-			</ul>
-		
+						<li>
+							<a href="">
+								<h3>F.A.Q.</h3>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</footer>	
 
 	</body>
