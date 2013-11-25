@@ -52,7 +52,8 @@
 				FB.login(function(response) {
 				   if (response.authResponse) 
 				   {
-				    	getUserInfo();
+				    	window.location.replace("map.html");//redirection vers la carte
+						getUserInfo();
 		  			} else 
 		  			{
 		  	    	 console.log('User cancelled login or did not fully authorize.');

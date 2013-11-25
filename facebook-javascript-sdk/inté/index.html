@@ -1,0 +1,71 @@
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>FriendSheep</title>
+		<meta name="description" content="">
+
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+	 	
+		<link rel="stylesheet" href="css/style_map.css">
+		<link rel="stylesheet" href="video/css/video.css">
+		
+		<script>
+		 function redirection(){
+			window.location.replace("map.html");
+		 }
+
+		</script>
+		
+	</head>
+
+	<body style="background-color:#e54141; height:800px;">
+	
+		<header class="header_index">
+		
+			<div class="content_index">
+				<h1>
+					<img src="img/logo.png" alt="logo_friendsheep" />
+				</h1>
+				<h2 id="baseline">Laissez-vous guider par vos amis</h2>
+			</div>
+
+		</header>
+		<div class="content_video">
+			<div class="content">
+				<div id="button" class="loading">
+				    <span></span>
+				    <span></span>
+				</div>
+					<video id="video">
+					    <source src="video/assets/v06-07_ld.mp4" type='video/mp4' >
+					    <p>Your user agent does not support the HTML5 Video element.</p>
+					</video>
+				  
+				  <div id="progressBar">
+				    <span class="progress"></span>
+				    <span class="buffer"></span>
+				  </div>
+				
+				<div class="fbConnect" id="status">
+					<img src="img/Button_FB_Connect.jpg" style="cursor:pointer;" onclick="redirection()"/>
+					<script src="//connect.facebook.net/en_US/all.js"></script>
+				</div>
+					<div id="facebook-friends">
+						<div id="message">
+						Logs:<br/>
+						</div>
+					</div>
+
+			</div>	
+		</div>	
+		
+<!-- Intégration de la libraire jQuery -->
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="video/js/video.js"></script>
+		
+	</body>
+
+</html>
