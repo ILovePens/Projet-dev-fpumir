@@ -7,6 +7,7 @@
 		<!-- On ouvre la fenêtre à la largeur de l'écran -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="css/style_map.css">
+		<style type="text/css">span{float: left;margin-left: 116px;margin-top: -10px;padding-bottom: 5px;color: red;font-family: 'TrebuchetMSBold';}</style>
 	</head>
 
 
@@ -39,19 +40,19 @@
 					<legend>Nous contacter</legend>
 						 
 						 <input type="text" id="full_name" name="full_name" required />
-						 <label for="full_name">Votre nom</label>
+						 <label id="label" for="full_name">Votre nom</label>
 						 <input type="email" id="email_addr" name="email_addr" required />
-						 <label for="email_addr">Votre email </label>
+						 <label id="label" for="email_addr">Votre email </label>
 						 <span id="mail_diff"></span>
 						 <input type="email" id="email_addr_repeat" name="email_addr_repeat" required />
-						 <label for="email_addr_repeat" id="mail_confirm">Retapez votre email </label>
+						 <label id="label" for="email_addr_repeat" id="mail_confirm">Retapez votre email </label>
 						 <textarea rows="8" cols="30%" id="message" name="message" required ></textarea>
-						 <label for="message">Votre message </label>
+						 <label id="label" for="message">Votre message </label>
 					 
 						<div>
 							<div id="form">
 							  <input type="submit" name="envoi" value="Envoyer"  onclick="return verif();"/>
-							  <input type="submit" value="Envoyer" />
+							  <input id="lafatigue" type="submit" value="Envoyer" />
 							</div>
 						</div>
 					</fieldset>

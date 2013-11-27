@@ -82,15 +82,14 @@ position: relative;
 width: 75%;
 left: 116px;
 max-width: 1000px;
-margin: 140px auto;
+margin: 0px auto;
 }
 
 .header_index
 {
 	width: 100%;
 	height: 80px;
-	background-color: #e54141;
-	margin-bottom:30px;
+	background-color: #ed4b49;
 }
 
 header
@@ -377,8 +376,8 @@ header
 			{
 				box-sizing: border-box;
 				font-family: 'TrebuchetMSBold';
-				padding: .5em;
-				text-indent: .2em;
+				font-size: 18px;
+				padding: 6px 1px 1px 8px;
 				height: 22px;
 				width: 82%;
 				background-color: #fff;
@@ -457,7 +456,7 @@ footer
 	clear: left;
 
 }
-	
+
 	footer .content
 	{
 		height: 100px;
@@ -545,7 +544,7 @@ text-align:center;
 
 fieldset{width:36%; height:406px;margin:25px auto;position:relative;text-align:right;padding:25px 25px 25px 65px;background-color:#3d3d3d;}
   legend{text-align:center;}
-  input, label{padding:0 .5em;line-height:2em;}
+  #label{padding:0 .5em;line-height:2em;}
   input {font-family: 'TrebuchetMSBold', serif;width:70%;margin:0 0 15px 0;box-sizing:border-box;border-radius:5px;}
   input:invalid { border:2px dotted #CA605E;}
   input:focus{border-color:transparent;outline:none;}
@@ -573,7 +572,7 @@ fieldset{width:36%; height:406px;margin:25px auto;position:relative;text-align:r
   input[type=submit]{font-size:1.5em;line-height:3em;width:100%;background-color:#4AC95C;background-image:-webkit-linear-gradient(top, rgba(255, 255, 255, .4), rgba(0, 0, 0, .1));color:#fff;border:none;display:block;position:absolute;-webkit-backface-visibility: hidden;text-shadow:0px -1px 0px rgba(0,0,0,.5);text-transform:uppercase;-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .4), inset 0 -1px rgba(0, 0, 0, .5), inset 0 1px rgba(255, 255, 255, .5);}
   fieldset > div{width:100%;height:50px;-webkit-perspective:800px;}
   #form {width:70%;margin-left:60px;height:100%;position:absolute;-webkit-transform-origin: center center;-webkit-transition: -webkit-transform .3s ease;-webkit-transform-style: preserve-3d;}
-  div input:last-child{-webkit-transform:rotateY(180deg);background-color:#BAB8B8;opacity:.8;}
+  #lafatigue {-webkit-transform:rotateY(180deg);background-color:#BAB8B8;opacity:.8;}
   
   @-webkit-keyframes shake{
   from{left:5px;}
