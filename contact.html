@@ -8,11 +8,103 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="css/style_map.css">
 		<style type="text/css">span{float: left;margin-left: 116px;margin-top: -10px;padding-bottom: 5px;color: red;font-family: 'TrebuchetMSBold';}</style>
+	<script>
+		  window.fbAsyncInit = function() {
+			// on initialise le FB JS SDK / init the FB JS SDK
+		    FB.init({
+		      appId      : '255821301231746', // ID de l'application / Application's ID
+		      channelUrl : 'http://localhost/Projet-dev-fpumir/', // URL du fichier / Channel File
+		      status     : true, // vérifie si connecté / check login status
+		      cookie     : true, // autorisation de l'utilisation des cookie / enable cookies to allow the server to access the session
+		      xfbml      : true  //  utilisé pour intégrer des modules sociaux / look for social plugins on the page
+		    });
+		    
+		    
+			FB.Event.subscribe('auth.authResponseChange', function(response) 
+			{
+		 	 if (response.status === 'connected') 
+		  	{
+		  		document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
+		  		// SUCCES / SUCCESS
+		  	}	 
+			else if (response.status === 'not_authorized') 
+		    {
+		    	document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
+
+				// ECHEC / FAILED
+		    } else 
+		    {
+		    	document.getElementById("message").innerHTML +=  "<br>Logged Out";
+
+		    	// ERREUR INCONNUE / UNKNOWN ERROR
+		    }
+			});	
+			
+		    };
+		    // fonction qui permet de récupérer les données utilisateurs si autorisé
+		   	function Login()
+			{
+			
+				FB.login(function(response) {
+				   if (response.authResponse) 
+				   {
+						getUserInfo();
+						loadFriends();
+		  			} else 
+		  			{
+		  	    	 console.log('User cancelled login or did not fully authorize.');
+		   			}
+				 },{scope: 'email,user_photos,user_videos'});
+			
+			
+			}
+		  // fonction appelée si on peut récupérer les données
+		  function getUserInfo() {
+			    FB.api('/me', function(response) {
+
+			  var nom=response.name;
+				  img ='<img src="http://graph.facebook.com/'+response.id+'/picture"/>';
+			  	  
+			  	  document.getElementById("nomProfil").innerHTML=nom;
+				  document.getElementById("imgProfil").innerHTML=img;
+			  	  	    
+		    });
+		    }
+			
+			function loadFriends(){
+		    //get array of friends
+		    FB.api('/me/friends', function(response) {
+		        console.log(response);
+		        var str="";
+		        for(i=0;i<response.data.length;i++)
+		            {
+		                str += "<p>"+response.data[i].name+"<p>";
+		            }
+				document.getElementById("fbFriends").innerHTML=str;
+		    });
+			}
+
+			function Logout()
+			{
+				window.location.replace("index.html");//redirection vers la carte
+				FB.logout(function(){document.location.reload();});
+			}
+
+		  // Load the SDK asynchronously
+		  (function(d){
+		     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement('script'); js.id = id; js.async = true;
+		     js.src = "//connect.facebook.net/en_US/all.js";
+		     ref.parentNode.insertBefore(js, ref);
+		   }(document));
+
+		</script>
 	</head>
 
 
-	<body>
-			
+	<body onload="Login();">
+		
 		<header>
 		
 			<div class="content">
@@ -21,9 +113,9 @@
 				</h1>
 				<h2 id="baseline">Laissez-vous guider par vos amis</h2>
 				<div id="profil">
-					<p><img src="profilPic.jpg" alt="photo de profil" /></p>
+					<p id="imgProfil"><img src="profilPic.jpg" alt="photo de profil" /></p>
 					<h2 id="nomProfil">Prenom Nom</h2>
-					<a href="" alt="log_out">
+					<a href="index.html" alt="log_out">
 						<p>Déconnexion</p>
 					</a>
 				</div>

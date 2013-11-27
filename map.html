@@ -9,10 +9,282 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 	 	
 		<link rel="stylesheet" href="css/style_map.css">
+	
 
+		<script>
+		  window.fbAsyncInit = function() {
+			// on initialise le FB JS SDK / init the FB JS SDK
+		    FB.init({
+		      appId      : '255821301231746', // ID de l'application / Application's ID
+		      channelUrl : 'http://localhost/Projet-dev-fpumir/', // URL du fichier / Channel File
+		      status     : true, // vérifie si connecté / check login status
+		      cookie     : true, // autorisation de l'utilisation des cookie / enable cookies to allow the server to access the session
+		      xfbml      : true  //  utilisé pour intégrer des modules sociaux / look for social plugins on the page
+		    });
+		    
+		    
+			FB.Event.subscribe('auth.authResponseChange', function(response) 
+			{
+		 	 if (response.status === 'connected') 
+		  	{
+		  		document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
+		  		// SUCCES / SUCCESS
+		  	}	 
+			else if (response.status === 'not_authorized') 
+		    {
+		    	document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
+
+				// ECHEC / FAILED
+		    } else 
+		    {
+		    	document.getElementById("message").innerHTML +=  "<br>Logged Out";
+
+		    	// ERREUR INCONNUE / UNKNOWN ERROR
+		    }
+			});	
+			
+		    };
+		    // fonction qui permet de récupérer les données utilisateurs si autorisé
+		   	function Login()
+			{
+			
+				FB.login(function(response) {
+				   if (response.authResponse) 
+				   {
+						getUserInfo();
+						loadFriends();
+		  			} else 
+		  			{
+		  	    	 console.log('User cancelled login or did not fully authorize.');
+		   			}
+				 },{scope: 'email,user_photos,user_videos'});
+			
+			
+			}
+		  // fonction appelée si on peut récupérer les données
+		  function getUserInfo() {
+			    FB.api('/me', function(response) {
+
+			  var nom=response.name;
+				  img ='<img src="http://graph.facebook.com/'+response.id+'/picture"/>';
+			  	  
+			  	  document.getElementById("nomProfil").innerHTML=nom;
+				  document.getElementById("carte").innerHTML="La carte de "+nom;
+				  document.getElementById("imgProfil").innerHTML=img;
+			  	  	    
+		    });
+		    }
+			
+			function loadFriends(){
+		    //get array of friends
+		    FB.api('/me/friends', function(response) {
+		        console.log(response);
+		        var str="";
+		        for(i=0;i<response.data.length;i++)
+		            {
+		                str += "<p>"+response.data[i].name+"<p>";
+		            }
+				document.getElementById("fbFriends").innerHTML=str;
+		    });
+			}
+
+			function Logout()
+			{
+				window.location.replace("index.html");//redirection vers la carte
+				FB.logout(function(){document.location.reload();});
+			}
+
+		  // Load the SDK asynchronously
+		  (function(d){
+		     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement('script'); js.id = id; js.async = true;
+		     js.src = "//connect.facebook.net/en_US/all.js";
+		     ref.parentNode.insertBefore(js, ref);
+		   }(document));
+
+		</script>
+		
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+	function abc(){
+		var nom = sessionStorage.getItem("nom");
+		document.getElementById("nomProfil").innerHTML=nom;
+		var img = sessionStorage.getItem("img");
+		document.getElementById("photoProfil").innerHTML=img;
+	}
+	</script>
+	<script>
+	var map;
+	var id;
+	var markers = [];
+	
+//Déclaration des points, du zoom et du type de carte
+function initialize() {
+  var mapOptions = {
+    zoom: 12,
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  }
+  
+  //Création de la carte
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  
+  // Try HTML5 geolocation
+  if(navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = new google.maps.LatLng(position.coords.latitude,
+                                       position.coords.longitude);
+	  var lat = pos.lat();
+	  var lng = pos.lng();
+	  
+      var infowindow = new google.maps.InfoWindow({
+        map: map,
+        position: pos,
+        content: 
+		'<p>Vous êtes ici !</p>'+
+		'<p>'+lat+','+lng+'</p>'+
+		'<p><input type="button" value="Marquer ma position actuelle" onClick="ajoutMarkerGeoloc('+lat+','+lng+');"></p>'
+      });
+      map.setCenter(pos);
+    }, function() {
+      handleNoGeolocation(true);
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleNoGeolocation(false);
+  }
+}
+
+function ajoutMarkerGeoloc(lat,lng){
+	// creation objet Geocoder
+	var geocoder = new google.maps.Geocoder();
+	// on met la lat et la lng dans une seule variable
+	var latlng = new google.maps.LatLng(lat, lng);
+	// appel methode geocode
+	geocoder.geocode({'latLng': latlng}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+		  if (results[1]) {
+			map.setZoom(12);
+			marker = new google.maps.Marker({
+				position: latlng,
+				map: map
+			});
+		  } else {
+			alert('No results found');
+		  }
+		  // centrage de la carte
+		  map.setCenter( latlng);
+		id = marker.__gm_id;
+		markers[id] = marker;
+		// Options de la fenêtre
+		var myWindowOptions = {
+		content:
+		'<h2>NomVille</h2>'+
+		'<p>ID: '+id+'!</p>'+
+		'<p>J\'ai visité cet endroit!</p>'+
+		'<p><input type="button" value="Supprimer" onClick="supprMarker('+id+');"></p>'+
+		'<p><a href="">Vidéo</a></p>'
+		};
+		// Création de la fenêtre
+		var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
+		// Affichage de la fenêtre au click sur le marker
+		google.maps.event.addListener(marker, 'click', function() {
+		myInfoWindow.open(map,marker);
+		});
+		} else {
+		  alert('Geocoder failed due to: ' + status);
+		}
+	  });
+}
+
+//Ajout d'un marqueur
+function ajoutMarker(){
+	
+  //récupère adresse saisie
+  var address = document.getElementById("adresse").value;
+  // creation objet Geocoder
+  var geocoder = new google.maps.Geocoder();
+  // appel methode geocode
+  geocoder.geocode( { 'address': address}, function( data, status) {
+    // reponse OK
+    if( status == google.maps.GeocoderStatus.OK){
+      // recup. position
+      var pos = data[0].geometry.location;
+      // creation d'un marker
+      var marker = new google.maps.Marker({
+        map : map,
+        position : pos,
+		title: address
+      });
+      // centrage de la carte
+      map.setCenter( pos);
+	id = marker.__gm_id;
+    markers[id] = marker;
+	// Options de la fenêtre
+	var myWindowOptions = {
+	content:
+	'<h2>NomVille</h2>'+
+	'<p>ID: '+id+'!</p>'+
+	'<p>J\'ai visité '+address+'!</p>'+
+	'<p><input type="button" value="Supprimer" onClick="supprMarker('+id+');"></p>'+
+	'<p><a href="">Vidéo</a></p>'
+	};
+	// Création de la fenêtre
+	var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
+	// Affichage de la fenêtre au click sur le marker
+	google.maps.event.addListener(marker, 'click', function() {
+	myInfoWindow.open(map,marker);
+	});
+    }
+    else {
+      alert("Geocode was not successful for the following reason: " + status);
+    }
+  });
+return false}
+
+//Pour supprimer un marker sélectionné grâce à son id
+function supprMarker(id){
+	markers[id].setMap(null);
+}
+
+//Géolocalisation fail
+function handleNoGeolocation(errorFlag) {
+  if (errorFlag) {
+    var content = 'Erreur: Le service de géolocalisation a échoué.';
+  } else {
+    var content = 'Erreur: Votre navigateur web ne supporte pas le service de géolocalisation.';
+  }
+
+  var options = {
+    map: map,
+    position: new google.maps.LatLng(48.853,2.35),
+    content: content
+  };
+
+  var infowindow = new google.maps.InfoWindow(options);
+  map.setCenter(options.position);
+}
+
+//Affichage sur mobile
+function detectBrowser() {
+  var useragent = navigator.userAgent;
+  var mapdiv = document.getElementById("map");
+
+  if (useragent.indexOf('iPhone') != -1 || useragent.indexOf('Android') != -1 ) {
+    mapdiv.style.width = '100%';
+    mapdiv.style.height = '100%';
+  } else {
+    mapdiv.style.width = '600px';
+    mapdiv.style.height = '800px';
+  }
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
 	</head>
 
-	<body>
+	<body onload="Login();">
 		
 		<header>
 		
@@ -22,9 +294,9 @@
 				</h1>
 				<h2 id="baseline">Laissez-vous guider par vos amis</h2>
 				<div id="profil">
-					<p><img src="profilPic.jpg" alt="photo de profil" /></p>
+					<p id="imgProfil"><img src="profilPic.jpg" alt="photo de profil" /></p>
 					<h2 id="nomProfil">Prenom Nom</h2>
-					<a href="" alt="log_out">
+					<a href="index.html" alt="log_out">
 						<p>Déconnexion</p>
 					</a>
 				</div>
@@ -90,7 +362,7 @@
 					</li>
 
 					<li id="friendList">
-						<div>
+						<div id="fbFriends">
 							<p>Michel Mabdoul</p>
 							<p>Joseph Lurrivent</p>
 							<p>friend</p>
@@ -112,13 +384,12 @@
 
 			<section id="blockMap">
 
-				<h2>La carte de Nom Prenom</h2>
+				<h2 id="carte">La carte de Nom Prenom</h2>
 
-				<div id="map">
 			      <form id="geocoder">
-			        <input type="text" name="address" placeholder="Rechercher une adresse" />
-			      </form>
-			    </div>
+			        <input type="text" id="adresse" placeholder="Rechercher une adresse" onKeyPress="if (event.keyCode == 13) return ajoutMarker()"/>
+				  </form>
+			    <div id="map"></div>
 
 			</section>
 	

@@ -10,7 +10,11 @@
 	 	
 		<link rel="stylesheet" href="css/style_map.css">
 		<link rel="stylesheet" href="video/css/video.css">
-		
+		<script>
+		function abc(){
+		window.location.replace("map.html");//redirection vers la carte
+		}
+		</script>
 		<script>
 		  window.fbAsyncInit = function() {
 			// on initialise le FB JS SDK / init the FB JS SDK
@@ -140,7 +144,7 @@
 				  </div>
 				
 				<div class="fbConnect" id="status">
-					<img src="img/Button_FB_Connect.jpg" style="cursor:pointer;" onclick="Login()"/>
+					<img src="img/Button_FB_Connect.jpg" style="cursor:pointer;" onclick="abc()"/>
 					<script src="//connect.facebook.net/en_US/all.js"></script>
 				</div>
 					<!--<div id="facebook-friends">
