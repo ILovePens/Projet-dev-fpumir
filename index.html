@@ -10,108 +10,119 @@
                  
                 <link rel="stylesheet" href="css/style_map.css">
                 <link rel="stylesheet" href="video/css/video.css">
-                <script>
-                function abc(){
-                window.location.replace("map.html");//redirection vers la carte
-                }
-                </script>
-                <script>
-                  window.fbAsyncInit = function() {
-                        // on initialise le FB JS SDK / init the FB JS SDK
-                    FB.init({
-                      appId      : '255821301231746', // ID de l'application / Application's ID
-                      channelUrl : 'http://localhost/Projet-dev-fpumir/', // URL du fichier / Channel File
-                      status     : true, // vérifie si connecté / check login status
-                      cookie     : true, // autorisation de l'utilisation des cookie / enable cookies to allow the server to access the session
-                      xfbml      : true  //  utilisé pour intégrer des modules sociaux / look for social plugins on the page
-                    });
-                    
-                    
-                        FB.Event.subscribe('auth.authResponseChange', function(response) 
-                        {
-                          if (response.status === 'connected') 
-                          {
-                                  document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
-                                  // SUCCES / SUCCESS
-                                  window.location.replace("map.html");//redirection vers la carte
-                          }         
-                        else if (response.status === 'not_authorized') 
-                    {
-                            document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
+          <script>
+		  window.fbAsyncInit = function() {
+			// on initialise le FB JS SDK / init the FB JS SDK
+		    FB.init({
+		      appId      : '255821301231746', // ID de l'application / Application's ID
+		      channelUrl : 'http://localhost/Projet-dev-fpumir/', // URL du fichier / Channel File
+		      status     : true, // vérifie si connecté / check login status
+		      cookie     : true, // autorisation de l'utilisation des cookie / enable cookies to allow the server to access the session
+		      xfbml      : true  // utilisé pour intégrer des modules sociaux / look for social plugins on the page
+		    });
+		    
+		    
+			FB.Event.subscribe('auth.authResponseChange', function(response) 
+			{
+			//Si déjà connecté
+		 	 if (response.status === 'connected') 
+		  	{
+		  		// SUCCES / SUCCESS
+				document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
+		  	}	 
+			//Si non autorisé à se connecter
+			else if (response.status === 'not_authorized') 
+		    {
+		    	// ECHEC / FAILED
+				document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
+		    } 
+			//Autres erreurs possibles
+			else 
+		    {
+		    	// ERREUR INCONNUE / UNKNOWN ERROR
+				document.getElementById("message").innerHTML +=  "<br>Logged Out";
+		    }
+			});	
+			
+		    };
+		    // fonction qui permet de récupérer les données utilisateurs si autorisé
+		   	function Login()
+			{
+			
+				FB.login(function(response) {
+				   //Si l'autorisation est validée ou formulaire de connexion bien rempli
+				   if (response.authResponse) 
+				   {
+						//Appel de la fonction getUserInfo() qui va récupérer les données de l'utilisateur
+						getUserInfo();
+						//Appel de la fonction loadFriends() qui va récupérer la liste d'amis de l'utilisateur
+						loadFriends();
+						var img = '<img src="img/btn_friendsheep.png" style="cursor:pointer;" onclick="redirect()"/>';
+						document.getElementById("status").innertHTML=img;
+		  			} 
+					//Si autorisation non confirmée ou formulaire mal rempli
+					else 
+		  			{
+		  	    	 console.log('User cancelled login or did not fully authorize.');
+		   			}
+				 },{scope: 'email,user_photos,user_videos'});
+			
+			
+			}
+		  // fonction appelée si on peut récupérer les données
+		  function getUserInfo() {
+			    FB.api('/me', function(response) {
+				  //récupère le nom et prénom
+				  var nom=response.name;
+				  //stockage du nom et prénom dans la sessionStorage
+				  sessionStorage.setItem("nom",nom);
+				  //récupère l'image
+				  var img='<img src="http://graph.facebook.com/'+response.id+'/picture"/>';
+				  //stockage de l'image dans la sessionStorage
+				  sessionStorage.setItem("img",img);
+		    });
+		    }
+			
+			function loadFriends(){
+		    //récupère la liste d'amis
+		    FB.api('/me/friends', function(response) {
+		        var str="";
+				//Boucle for pour parcourir la liste d'amis et la stocker dans la variable var
+		        for(i=0;i<response.data.length;i++)
+		            {
+		                str += "<p>"+response.data[i].name+"<p>";
+		            }
+				//stockage de la liste d'amis dans la sessionStorage
+				sessionStorage.setItem("friendsList",str);
+		    });
+			}
 
-                                // ECHEC / FAILED
-                    } else 
-                    {
-                            document.getElementById("message").innerHTML +=  "<br>Logged Out";
+			//Fonction pour se déconnecter
+			function Logout()
+			{
+				//supprime les données dans la sessionStorage
+				sessionStorage.clear();
+				//redirection vers la carte
+				window.location.replace("index.html");
+			}
 
-                            // ERREUR INCONNUE / UNKNOWN ERROR
-                    }
-                        });        
-                        
-                    };
-                    // fonction qui permet de récupérer les données utilisateurs si autorisé
-                           function Login()
-                        {
-                        
-                                FB.login(function(response) {
-                                   if (response.authResponse) 
-                                   {
-                                            window.location.replace("map.html");//redirection vers la carte
-                                                getUserInfo();
-                                          } else 
-                                          {
-                                       console.log('User cancelled login or did not fully authorize.');
-                                           }
-                                 },{scope: 'email,user_photos,user_videos'});
-                        
-                        
-                        }
-                  // fonction appelée si on peut récupérer les données
-                  function getUserInfo() {
-                            FB.api('/me', function(response) {
+		  // Load the SDK asynchronously
+		  (function(d){
+		     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement('script'); js.id = id; js.async = true;
+		     js.src = "//connect.facebook.net/en_US/all.js";
+		     ref.parentNode.insertBefore(js, ref);
+		   }(document));
 
-                          var str="<b>Name</b> : "+response.name+"<br>";
-                                    str +="<b>Link: </b>"+response.link+"<br>";
-                                    str +="<b>Username:</b> "+response.username+"<br>";
-                                    str +="<b>id: </b>"+response.id+"<br>";
-                                    str +="<b>Email:</b> "+response.email+"<br>";
-                                  str +='<b>Image</b>: <img src="http://graph.facebook.com/'+response.id+'/picture"/><br>';
-                                    str +="<input type='button' value='Load Friends' onclick='loadFriends();'/>";
-                                  str +="<input type='button' value='Logout' onclick='Logout();'/>";
-                                    document.getElementById("status").innerHTML=str;
-                                                
-                    });
-                    }
-                        
-                        function loadFriends(){
-                    //get array of friends
-                    FB.api('/me/friends', function(response) {
-                        console.log(response);
-                        var str="";
-                        for(i=0;i<response.data.length;i++)
-                            {
-                                                str += '<img src="http://graph.facebook.com/'+response.data[i].id+'/picture"/>';
-                                str += response.data[i].name+"<br>";
-                            }
-                                document.getElementById("facebook-friends").innerHTML=str;
-                    });
-                        }
-
-                        function Logout()
-                        {
-                                FB.logout(function(){document.location.reload();});
-                        }
-
-                  // Load the SDK asynchronously
-                  (function(d){
-                     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-                     if (d.getElementById(id)) {return;}
-                     js = d.createElement('script'); js.id = id; js.async = true;
-                     js.src = "//connect.facebook.net/en_US/all.js";
-                     ref.parentNode.insertBefore(js, ref);
-                   }(document));
-
-                </script>
+		</script>
+	
+	<script>
+		function redirect(){
+			//redirection vers la carte
+			window.location.replace("map.html");
+		}
+	</script>
                 
         </head>
 
@@ -145,15 +156,9 @@
                                   </div>
                                 
                                 <div class="fbConnect" id="status">
-                                        <img src="img/Button_FB_Connect.png" style="cursor:pointer;" onclick="abc()"/>
+                                        <img src="img/Button_FB_Connect.png" style="cursor:pointer;" onclick="Login()"/>
                                         <script src="//connect.facebook.net/en_US/all.js"></script>
                                 </div>
-                                        <!--<div id="facebook-friends">
-                                                <div id="message">
-                                                Logs:<br/>
-                                                </div>
-                                        </div>-->
-
                         </div>        
                 </div>        
                 
