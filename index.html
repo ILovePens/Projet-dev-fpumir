@@ -1,63 +1,167 @@
 <html lang="fr">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <head>
+                <meta charset="utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-		<title>FriendSheep</title>
-		<meta name="description" content="">
+                <title>FriendSheep</title>
+                <meta name="description" content="">
 
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-	 	
-		<link rel="stylesheet" href="css/style_map.css">
-		<link rel="stylesheet" href="video/css/video.css">
-		<script>
-		function redirect(){
-		window.location.replace("map.html");//redirection vers la carte
-		}
-		</script>
-	
-	</head>
+                <meta name="viewport" content="width=device-width,initial-scale=1">
+                 
+                <link rel="stylesheet" href="css/style_map.css">
+                <link rel="stylesheet" href="video/css/video.css">
+                <script>
+                function abc(){
+                window.location.replace("map.html");//redirection vers la carte
+                }
+                </script>
+                <script>
+                  window.fbAsyncInit = function() {
+                        // on initialise le FB JS SDK / init the FB JS SDK
+                    FB.init({
+                      appId      : '255821301231746', // ID de l'application / Application's ID
+                      channelUrl : 'http://localhost/Projet-dev-fpumir/', // URL du fichier / Channel File
+                      status     : true, // vérifie si connecté / check login status
+                      cookie     : true, // autorisation de l'utilisation des cookie / enable cookies to allow the server to access the session
+                      xfbml      : true  //  utilisé pour intégrer des modules sociaux / look for social plugins on the page
+                    });
+                    
+                    
+                        FB.Event.subscribe('auth.authResponseChange', function(response) 
+                        {
+                          if (response.status === 'connected') 
+                          {
+                                  document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
+                                  // SUCCES / SUCCESS
+                                  window.location.replace("map.html");//redirection vers la carte
+                          }         
+                        else if (response.status === 'not_authorized') 
+                    {
+                            document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
 
-	<body style="background-color:#e54141; height:800px;">
-	
-		<header class="header_index">
-		
-			<div class="content_index">
-				<h1>
-					<img src="img/logo.png" alt="logo_friendsheep" />
-				</h1>
-				<h2 id="baseline">Laissez-vous guider par vos amis</h2>
-			</div>
+                                // ECHEC / FAILED
+                    } else 
+                    {
+                            document.getElementById("message").innerHTML +=  "<br>Logged Out";
 
-		</header>
-		<div class="content_video">
-			<div class="content">
-				<div id="button" class="loading">
-				    <span></span>
-				    <span></span>
-				</div>
-					<video id="video">
-					    <source src="video/assets/compo.mp4" type='video/mp4' >
-					    <p>Your user agent does not support the HTML5 Video element.</p>
-					</video>
-				  
-				  <div id="progressBar">
-				    <span class="progress"></span>
-				    <span class="buffer"></span>
-				  </div>
-				
-				<div class="fbConnect" id="status">
-					<img src="img/Button_FB_Connect.jpg" style="cursor:pointer;" onclick="redirect()"/>
-					
-				</div>
-			</div>	
-		</div>	
-		
+                            // ERREUR INCONNUE / UNKNOWN ERROR
+                    }
+                        });        
+                        
+                    };
+                    // fonction qui permet de récupérer les données utilisateurs si autorisé
+                           function Login()
+                        {
+                        
+                                FB.login(function(response) {
+                                   if (response.authResponse) 
+                                   {
+                                            window.location.replace("map.html");//redirection vers la carte
+                                                getUserInfo();
+                                          } else 
+                                          {
+                                       console.log('User cancelled login or did not fully authorize.');
+                                           }
+                                 },{scope: 'email,user_photos,user_videos'});
+                        
+                        
+                        }
+                  // fonction appelée si on peut récupérer les données
+                  function getUserInfo() {
+                            FB.api('/me', function(response) {
+
+                          var str="<b>Name</b> : "+response.name+"<br>";
+                                    str +="<b>Link: </b>"+response.link+"<br>";
+                                    str +="<b>Username:</b> "+response.username+"<br>";
+                                    str +="<b>id: </b>"+response.id+"<br>";
+                                    str +="<b>Email:</b> "+response.email+"<br>";
+                                  str +='<b>Image</b>: <img src="http://graph.facebook.com/'+response.id+'/picture"/><br>';
+                                    str +="<input type='button' value='Load Friends' onclick='loadFriends();'/>";
+                                  str +="<input type='button' value='Logout' onclick='Logout();'/>";
+                                    document.getElementById("status").innerHTML=str;
+                                                
+                    });
+                    }
+                        
+                        function loadFriends(){
+                    //get array of friends
+                    FB.api('/me/friends', function(response) {
+                        console.log(response);
+                        var str="";
+                        for(i=0;i<response.data.length;i++)
+                            {
+                                                str += '<img src="http://graph.facebook.com/'+response.data[i].id+'/picture"/>';
+                                str += response.data[i].name+"<br>";
+                            }
+                                document.getElementById("facebook-friends").innerHTML=str;
+                    });
+                        }
+
+                        function Logout()
+                        {
+                                FB.logout(function(){document.location.reload();});
+                        }
+
+                  // Load the SDK asynchronously
+                  (function(d){
+                     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+                     if (d.getElementById(id)) {return;}
+                     js = d.createElement('script'); js.id = id; js.async = true;
+                     js.src = "//connect.facebook.net/en_US/all.js";
+                     ref.parentNode.insertBefore(js, ref);
+                   }(document));
+
+                </script>
+                
+        </head>
+
+        <body style="background-color:#ed4b49; height:666px;">
+        
+                <header class="header_index">
+                
+                        <div class="content_index">
+                                <h1>
+                                        <img src="img/logo.png" alt="logo_friendsheep" />
+                                </h1>
+                                <h2 id="baseline">Laissez-vous guider par vos amis</h2>
+                        </div>
+
+                </header>
+                <div class="content_video">
+                        <div class="content">
+                                <div id="button" class="loading">
+                                    <span id="pause1" class="remove"></span>
+                                    <span id="pause2" class="remove"></span>
+                                    <div id="play" ></div>
+                                </div>
+                                        <video id="video">
+                                            <source src="video/assets/compo.mp4" type='video/mp4' >
+                                            <p>Your user agent does not support the HTML5 Video element.</p>
+                                        </video>
+                                  
+                                  <div id="progressBar">
+                                    <span class="progress"></span>
+                                    <span class="buffer"></span>
+                                  </div>
+                                
+                                <div class="fbConnect" id="status">
+                                        <img src="img/Button_FB_Connect.png" style="cursor:pointer;" onclick="abc()"/>
+                                        <script src="//connect.facebook.net/en_US/all.js"></script>
+                                </div>
+                                        <!--<div id="facebook-friends">
+                                                <div id="message">
+                                                Logs:<br/>
+                                                </div>
+                                        </div>-->
+
+                        </div>        
+                </div>        
+                
 <!-- Intégration de la libraire jQuery -->
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="video/js/video.js"></script>
-		
-	</body>
+                
+        </body>
 
 </html>

@@ -11,27 +11,26 @@ video.play{
 }
 
 #progressBar{
-	width:70%;
-	height:8px;
+	width: 63.5%;
+	height: 7px;
 	position: relative;
-	margin-top:-40px;
-	margin-bottom:20px;
-	border-radius:4px;
-	border:1px solid #fff;
-	left:15%;
-	opacity:.6;
-	z-index:6;
-	cursor:pointer;
+	margin-top: -38px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	border: 1px solid #fff;
+	left: 20.7%;
+	opacity: 1;
+	z-index: 6;
+	cursor: pointer;
 }
 
 #progressBar span{
-	border-top-left-radius:2px;
-	border-bottom-left-radius:2px;
-	height:6px;
-	background-color:#fff;
-	display:inline-block;
-	position:absolute;
-	top:1px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	height: 8px;
+	background-color: #fff;
+	display: inline-block;
+	position: absolute;
 }
 
 #progressBar .progress{
@@ -39,45 +38,54 @@ video.play{
 }
 
 #progressBar .buffer{
-	opacity:.5;
+	opacity:.6;
 }
 
 #button{
-	position:absolute;
-	top:55%;
-	left:42%;
-	z-index:0;
-	height:200px;
-	width:200px;
-	border:10px solid #fff;
-	border-radius:200px;
-	opacity:.5;
-	text-align:center;
-	background:transparent;
-	transition:opacity .9s ease, -webkit-transform .9s ease;
-	cursor:pointer;
+	position: absolute;
+	top: 67.2%;
+	left: 24.2%;
+	z-index: 0;
+	height: 50px;
+	width: 50px;
+	border: 6px solid #fff;
+	border-radius: 31px;
+	padding-left: 1px;
+	opacity: 1;
+	text-align: center;
+	background: transparent;
+	transition: opacity .9s ease, -webkit-transform .9s ease;
+	cursor: pointer;
 }
 
-#button.off{
-	-webkit-transform:scale(2);
-	opacity:0;
-	cursor:pointer;
-}
-
-#button.loading{
+.loading{
 	-webkit-animation: loading 1s infinite linear;
 	cursor:pointer;
 }
 
 #button span{
-	display:inline-block;
-	height:100px;
-	width:40px;
-	background:#fff;
-	margin:4em .5em 0 0;
-	cursor:pointer;
+	transition: opacity .9s ease, -webkit-transform .9s ease;
+	display: inline-block;
+	height: 31px;
+	width: 8px;
+	background: #fff;
+	margin-top: 10px;
+	margin-right: 1px;
+	cursor: pointer;
 }
 
+.remove{
+	opacity: 0;
+}
+
+#play{
+	transition: opacity .9s ease, -webkit-transform .9s ease;
+	border-bottom: 1.2em solid transparent;
+	border-left: 2.1em solid #fff;
+	border-top: 1.2em solid transparent;
+	margin-top: -40px;
+	margin-left: 13px;
+}
 @-webkit-keyframes loading {
     0% {-webkit-transform: rotate(0deg);}
     100% {-webkit-transform: rotate(360deg);}
