@@ -517,14 +517,9 @@ footer
 }
 
 .fbConnect{
-position:relative;
-top:-20px;
-margin: 100px auto;
+margin: 80px 384px;
 }
 
-.fbConnect img{
-margin-left:390px;
-}
 .content_video{
 width:100%;
 background-color:#3d3d3d;
