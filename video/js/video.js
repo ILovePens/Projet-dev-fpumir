@@ -2,6 +2,9 @@ var player={};
 
 player.video=document.getElementById('video');
 player.button=document.getElementById('button');
+player.span1=document.getElementById('pause1');
+player.span2=document.getElementById('pause2');
+player.span3=document.getElementById('play');
 player.video.load();
 
 
@@ -10,11 +13,15 @@ player.playPause = function () {
 	if(player.video.paused){
 		player.video.play();
 		player.video.classList.add('play');
-		player.button.classList.add('off');
+		player.span1.classList.remove('remove');
+		player.span2.classList.remove('remove');
+		player.span3.classList.add('remove');
 	}
 	else{
 		player.video.pause();
-		player.button.classList.remove('off');
+		player.span1.classList.add('remove');
+		player.span2.classList.add('remove');
+		player.span3.classList.remove('remove');
 	}
 }
 
