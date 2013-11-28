@@ -126,7 +126,7 @@
                 
         </head>
 
-        <body style="background-color:#ed4b49; height:666px;">
+        <body style="background-color:#ed4b49; height:100%;">
         
                 <header class="header_index">
                 
@@ -140,20 +140,23 @@
                 </header>
                 <div class="content_video">
                         <div class="content">
-                                <div id="button" class="loading">
+                                
+
+                                <video id="video">
+                                    <source src="video/assets/compo.mp4" type='video/mp4' >
+                                    <p>Your user agent does not support the HTML5 Video element.</p>
+                                </video>
+
+                                 <div id="button" class="loading">
                                     <span id="pause1" class="remove"></span>
                                     <span id="pause2" class="remove"></span>
                                     <div id="play" ></div>
                                 </div>
-                                        <video id="video">
-                                            <source src="video/assets/compo.mp4" type='video/mp4' >
-                                            <p>Your user agent does not support the HTML5 Video element.</p>
-                                        </video>
-                                  
-                                  <div id="progressBar">
-                                    <span class="progress"></span>
-                                    <span class="buffer"></span>
-                                  </div>
+
+	                              <div id="progressBar">
+	                                <span class="progress"></span>
+	                                <span class="buffer"></span>
+	                              </div>
                                 
                                 <div class="fbConnect" id="status">
                                         <img src="img/Button_FB_Connect.png" style="cursor:pointer;" onclick="Login()"/>
