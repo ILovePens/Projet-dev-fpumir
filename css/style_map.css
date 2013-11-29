@@ -137,10 +137,10 @@ header
 	}
 		header div #nomProfil
 		{
-			width: 200px;
-			float: right;
+			width: 254px;
 			margin-top: -1px;
-			margin-right: -20%;
+			margin-left: 175;
+			
 		}
 		header div h2 + a
 		{
@@ -149,7 +149,7 @@ header
 			font-size: 12px;
 			float: right;
 			margin-top: -31px;
-			margin-right: 25%;
+			margin-right: 20%;
 		}
 		header div a p
 		{
@@ -367,11 +367,11 @@ header
 		#geocoder
 		{
 			
-width: 49.7%;
-background-color: #4b4b4b;
-height: 32px;
-margin-left: 50.5%;
-margin-top: -32px;
+			width: 49.7%;
+			background-color: #4b4b4b;
+			height: 32px;
+			margin-left: 50.5%;
+			margin-top: -32px;
 		}
 
 			#geocoder input
@@ -389,6 +389,13 @@ margin-top: -32px;
 				margin-top: -23px;
 				border-radius: 10px;
 			}
+
+		section h2 + div input
+		{
+			margin:0;
+			padding: 0;
+			
+		}
 
 
 #mostVisited
